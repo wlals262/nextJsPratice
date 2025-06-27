@@ -1,5 +1,5 @@
 export interface BookData {
-  // interface는 객테 타입을 정의
+  // interface는 객체 타입을 정의
   id: number;
   title: string;
   subTitle: string;
