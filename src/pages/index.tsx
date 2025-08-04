@@ -4,25 +4,27 @@ import style from "./index.module.css";
 import books from "@/mock/books.json"; //@는 src 폴더를 의미함.
 import BookItem from "./components/book-item";
 import { InferGetServerSidePropsType } from "next";
+import fetchBooks from "@/lib/fetch-books";
 
-export const getServerSideProps = () => {
+export const getServerSideProps = async () => {
   // 컴포넌트보다 먼저 실행되어, 컴포넌트에 필요한 데이터를 불러오는 함수
-  const data = "hello";
 
-  console.log("서버사이드 함수");
+  const allBooks = await fetchBooks();
+  // fetchBooks 함수를 사용하기 위해 async/await 사용
 
   return {
     props: {
-      data,
+      allBooks,
     },
   };
 };
 
+// export default function Home({
+//   data,
+// }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 export default function Home({
-  data,
+  allBooks,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log(data);
-
   useEffect(() => {
     console.log(window);
   }, []);
